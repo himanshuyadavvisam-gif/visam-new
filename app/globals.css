@@ -1,26 +1,96 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Neutral warm-grey palette, tuned to match the hero background video's
+     studio backdrop so the hero blends into the rest of the page. */
+  --color-paper: #d9d6d0;
+  --color-paper-dim: #cac6bf;
+  --color-ink: #14120f;
+  --color-ink-soft: #4a4640;
+  /* Sampled from the new Visam Solutions logo mark. */
+  --color-accent: #0459dd;
+  --color-accent-soft: #cfe0fa;
+  --color-line: rgba(20, 18, 15, 0.14);
+
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--color-paper);
+  --color-paper-dim: var(--color-paper-dim);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-accent: var(--color-accent);
+  --color-accent-soft: var(--color-accent-soft);
+  --color-line: var(--color-line);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-paper);
+  scroll-behavior: auto;
+}
+
+html.has-lenis {
+  scroll-behavior: auto;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+/* Custom cursor is only enabled via JS on fine-pointer, non-touch devices */
+html.custom-cursor,
+html.custom-cursor * {
+  cursor: none !important;
+}
+
+.font-display {
+  font-family: var(--font-display), ui-serif, Georgia, serif;
+}
+
+.line-top {
+  border-top: 1px solid var(--color-line);
+}
+.line-bottom {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.mask-line {
+  overflow: hidden;
+  display: block;
+}
+
+/* Uses the `transform` property (not Tailwind's separate `translate`
+   property) so GSAP's transform-based tweens compose with it correctly
+   instead of stacking on top of it. */
+.mobile-menu-hidden {
+  transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
