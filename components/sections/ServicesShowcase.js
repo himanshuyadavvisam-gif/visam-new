@@ -9,7 +9,7 @@ import TiltCard from "@/components/ui/TiltCard";
 
 export default function ServicesShowcase() {
   return (
-    <section className="relative bg-paper py-28 md:py-36">
+    <section className="relative bg-paper py-16 md:py-36">
       <div className="mx-auto max-w-360 px-6 md:px-10">
         <div className="grid gap-12 md:grid-cols-[1.3fr_0.7fr] md:items-center md:gap-16">
           <div>

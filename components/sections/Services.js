@@ -41,7 +41,7 @@ export default function Services({ showMoreCard = false }) {
   }, []);
 
   return (
-    <section id="services" ref={sectionRef} className="relative overflow-hidden bg-paper py-28 md:py-0">
+    <section id="services" ref={sectionRef} className="relative overflow-hidden bg-paper py-16 md:py-0">
       <div className="px-6 md:hidden">
         <SectionHeading />
       </div>

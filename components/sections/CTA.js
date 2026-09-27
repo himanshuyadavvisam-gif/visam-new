@@ -7,7 +7,7 @@ import Magnetic from "@/components/ui/Magnetic";
 
 export default function CTA() {
   return (
-    <section className="relative bg-paper px-6 py-32 md:px-10 md:py-48">
+    <section className="relative bg-paper px-6 py-20 md:px-10 md:py-48">
       <div className="mx-auto max-w-4xl text-center">
         <span className="text-xs font-medium uppercase tracking-widest text-accent">
           Start a Project

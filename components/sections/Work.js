@@ -11,7 +11,7 @@ export default function Work({ limit, showMoreLink = false }) {
   const list = limit ? projects.slice(0, limit) : projects;
 
   return (
-    <section id="work" className="relative bg-paper py-28 md:py-36">
+    <section id="work" className="relative bg-paper py-16 md:py-36">
       <div className="px-6 md:px-10">
         <span className="text-xs font-medium uppercase tracking-widest text-accent">
           Selected Work

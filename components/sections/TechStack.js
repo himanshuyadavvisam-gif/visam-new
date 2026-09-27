@@ -4,7 +4,7 @@ import { technologies } from "@/lib/content";
 
 export default function TechStack() {
   return (
-    <section className="relative bg-paper-dim/50 py-28 md:py-36">
+    <section className="relative bg-paper-dim/50 py-16 md:py-36">
       <div className="mx-auto max-w-360 px-6 md:px-10">
         <span className="text-xs font-medium uppercase tracking-widest text-accent">
           Tooling

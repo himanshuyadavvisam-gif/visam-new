@@ -4,7 +4,7 @@ import { whyChoose } from "@/lib/content";
 
 export default function WhyChoose() {
   return (
-    <section className="relative bg-ink py-28 text-paper md:py-36">
+    <section className="relative bg-ink py-16 text-paper md:py-36">
       <div className="mx-auto max-w-360 px-6 md:px-10">
         <span className="text-xs font-medium uppercase tracking-widest text-accent">
           Why Visam

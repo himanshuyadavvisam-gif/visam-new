@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { brand, services } from "@/lib/content";
 import RevealText from "@/components/ui/RevealText";
 
 export default function Contact() {
   return (
-    <section className="relative bg-paper px-6 pb-28 pt-32 md:px-10 md:pb-36 md:pt-40">
+    <section className="relative bg-paper px-6 pb-16 pt-24 md:px-10 md:pb-36 md:pt-40">
       <span className="text-xs font-medium uppercase tracking-widest text-accent">
         Get In Touch
       </span>
@@ -64,25 +64,81 @@ function ContactForm() {
     service: "",
     message: "",
   });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState("idle"); // idle | sending | success | error
+  const [errorMessage, setErrorMessage] = useState("");
+  const formRef = useRef(null);
 
   const update = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Project inquiry from ${form.name || "website visitor"}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\nService: ${form.service}\n\n${form.message}`
-    );
-    window.location.href = `mailto:${brand.email}?subject=${subject}&body=${body}`;
-    setSent(true);
+    setStatus("sending");
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Something went wrong. Please try again.");
+      }
+
+      setStatus("success");
+      fireConfetti(formRef.current);
+      setForm({ name: "", email: "", phone: "", service: "", message: "" });
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(err.message);
+    }
   };
 
   const inputClass =
     "w-full rounded-xl border border-line bg-paper-dim/40 px-4 py-3 text-sm text-ink placeholder:text-ink-soft/60 outline-none transition-colors focus:border-accent";
 
+  if (status === "success") {
+    return (
+      <div
+        ref={formRef}
+        className="flex min-h-[420px] flex-col items-center justify-center rounded-3xl border border-line bg-paper-dim/40 p-8 text-center md:p-10"
+      >
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent/15">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path
+              d="M4 12.5L9.5 18L20 6"
+              stroke="var(--color-accent)"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+        <h3 className="mt-6 font-display text-2xl font-semibold text-ink md:text-3xl">
+          Message sent!
+        </h3>
+        <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink-soft md:text-base">
+          Thanks for reaching out — we&apos;ll get back to you within 24 hours.
+        </p>
+        <button
+          type="button"
+          onClick={() => setStatus("idle")}
+          className="mt-8 text-sm font-medium text-ink underline underline-offset-2 hover:text-accent"
+        >
+          Send another message
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="rounded-3xl border border-line bg-paper-dim/40 p-8 md:p-10">
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      className="rounded-3xl border border-line bg-paper-dim/40 p-8 md:p-10"
+    >
       <div className="grid gap-5 sm:grid-cols-2">
         <input
           required
@@ -130,14 +186,44 @@ function ContactForm() {
         className={`${inputClass} mt-5`}
       />
 
+      {status === "error" && (
+        <p className="mt-4 text-sm text-red-600">{errorMessage}</p>
+      )}
+
       <button
         type="submit"
+        disabled={status === "sending"}
         data-cursor="cta"
-        className="mt-6 inline-flex items-center gap-3 rounded-full bg-ink px-8 py-4 text-sm font-medium text-paper transition-colors hover:bg-accent"
+        className="mt-6 inline-flex items-center gap-3 rounded-full bg-ink px-8 py-4 text-sm font-medium text-paper transition-colors hover:bg-accent disabled:opacity-60"
       >
-        {sent ? "Opening your email app…" : "Send Message"}
+        {status === "sending" ? "Sending…" : "Send Message"}
         <span>→</span>
       </button>
     </form>
   );
+}
+
+async function fireConfetti(anchorEl) {
+  const confetti = (await import("canvas-confetti")).default;
+  const rect = anchorEl?.getBoundingClientRect();
+  const origin = rect
+    ? { x: (rect.left + rect.width / 2) / window.innerWidth, y: (rect.top + rect.height / 2) / window.innerHeight }
+    : { x: 0.5, y: 0.5 };
+
+  const colors = ["#0459dd", "#14120f", "#d9d6d0", "#cfe0fa"];
+
+  const burst = (opts) =>
+    confetti({
+      particleCount: 60,
+      spread: 70,
+      startVelocity: 35,
+      gravity: 1,
+      colors,
+      origin,
+      ...opts,
+    });
+
+  burst({ angle: 60 });
+  burst({ angle: 120 });
+  setTimeout(() => burst({ particleCount: 40, spread: 100, startVelocity: 25 }), 150);
 }

@@ -1,7 +1,10 @@
 "use client";
 
-const VIDEO_SRC =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260530_042513_df96a13b-6155-4f6e-8b93-c9dee66fba08.mp4";
+// Self-hosted, downscaled, and turned into a forward+reverse "boomerang" loop
+// so it plays continuously with no jump-cut at the restart (the original
+// hotlinked 4K/9Mbps clip also ended mid-turn, snapping back to the start
+// pose every loop, which read as a stall).
+const VIDEO_SRC = "/hero/hero-loop.mp4";
 
 // Full-bleed background video for the hero section only (absolute within the
 // section, not fixed to the viewport, so it never shows through the
@@ -11,7 +14,6 @@ export default function HeroVideoBackground() {
     <div className="absolute inset-0 z-0 overflow-hidden">
       <video
         src={VIDEO_SRC}
-        crossOrigin="anonymous"
         autoPlay
         muted
         loop

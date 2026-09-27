@@ -31,7 +31,7 @@ export default async function ServiceDetailPage({ params }) {
 
   return (
     <main>
-      <section className="relative bg-paper px-6 pb-24 pt-32 md:px-10 md:pb-32 md:pt-40">
+      <section className="relative bg-paper px-6 pb-16 pt-24 md:px-10 md:pb-32 md:pt-40">
         <Link
           href="/services"
           data-cursor="link"

@@ -7,7 +7,7 @@ import RevealText from "@/components/ui/RevealText";
 
 export default function Founder() {
   return (
-    <section className="relative overflow-hidden border-t border-paper/10 bg-ink py-28 text-paper md:py-36">
+    <section className="relative overflow-hidden border-t border-paper/10 bg-ink py-16 text-paper md:py-36">
       <div className="mx-auto grid max-w-360 gap-14 px-6 md:grid-cols-[0.7fr_1.3fr] md:items-center md:gap-16 md:px-10 lg:gap-24 lg:px-16">
         <TiltCard className="relative mx-auto w-full max-w-[320px] md:max-w-none">
           <div

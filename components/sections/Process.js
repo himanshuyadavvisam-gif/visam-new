@@ -35,7 +35,7 @@ export default function Process() {
   }, []);
 
   return (
-    <section id="process" ref={sectionRef} className="relative bg-paper py-28 md:py-36">
+    <section id="process" ref={sectionRef} className="relative bg-paper py-16 md:py-36">
       <div className="mx-auto max-w-360 px-6 md:px-10">
         <div className="grid gap-16 md:grid-cols-[1.3fr_0.7fr] md:gap-16 lg:gap-24">
           <div>

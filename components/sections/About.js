@@ -4,7 +4,7 @@ import { about } from "@/lib/content";
 
 export default function About() {
   return (
-    <section id="about" className="relative overflow-hidden bg-ink py-28 text-paper md:py-40">
+    <section id="about" className="relative overflow-hidden bg-ink py-16 text-paper md:py-40">
       <div className="relative px-6 md:px-10">
         <span className="text-xs font-medium uppercase tracking-widest text-accent">
           {about.eyebrow}
