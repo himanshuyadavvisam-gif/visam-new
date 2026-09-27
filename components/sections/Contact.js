@@ -204,8 +204,8 @@ function ContactForm() {
 }
 
 async function fireConfetti(anchorEl) {
-  const confetti = (await import("canvas-confetti")).default;
   const rect = anchorEl?.getBoundingClientRect();
+  const confetti = (await import("canvas-confetti")).default;
   const origin = rect
     ? { x: (rect.left + rect.width / 2) / window.innerWidth, y: (rect.top + rect.height / 2) / window.innerHeight }
     : { x: 0.5, y: 0.5 };
