@@ -2,11 +2,10 @@
 
 import { useRef } from "react";
 
-const MAX_TILT_DEG = 10;
-
 // A card that tilts toward the cursor while hovered — local tracking
-// (relative to its own bounds), not the whole viewport.
-export default function TiltCard({ children, className = "" }) {
+// (relative to its own bounds), not the whole viewport. Kept subtle by
+// default so it reads as a gentle depth cue, not a gimmick.
+export default function TiltCard({ children, className = "", maxTilt = 4, lift = 1.01 }) {
   const cardRef = useRef(null);
 
   const onMouseMove = (e) => {
@@ -15,9 +14,9 @@ export default function TiltCard({ children, className = "" }) {
     const rect = card.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width - 0.5;
     const py = (e.clientY - rect.top) / rect.height - 0.5;
-    card.style.transform = `perspective(1000px) rotateY(${px * MAX_TILT_DEG * 2}deg) rotateX(${
-      -py * MAX_TILT_DEG * 2
-    }deg) scale3d(1.02, 1.02, 1.02)`;
+    card.style.transform = `perspective(1000px) rotateY(${px * maxTilt * 2}deg) rotateX(${
+      -py * maxTilt * 2
+    }deg) scale3d(${lift}, ${lift}, ${lift})`;
   };
 
   const onMouseLeave = () => {

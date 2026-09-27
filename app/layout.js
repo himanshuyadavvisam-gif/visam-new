@@ -3,6 +3,7 @@ import "./globals.css";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import CustomCursor from "@/components/ui/CustomCursor";
 import Navbar from "@/components/navigation/Navbar";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import { brand } from "@/lib/content";
 
 const display = Bricolage_Grotesque({
@@ -43,6 +44,7 @@ export default function RootLayout({ children }) {
           <CustomCursor />
           <Navbar />
           {children}
+          <WhatsAppButton />
         </SmoothScrollProvider>
       </body>
     </html>

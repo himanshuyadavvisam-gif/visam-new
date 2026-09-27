@@ -85,8 +85,8 @@ function ProjectRow({ project, index }) {
         {project.index}
       </span>
 
-      <div className="relative h-[45vw] w-full overflow-hidden rounded-2xl bg-paper-dim md:h-[38vh] md:w-[46%]">
-        <div className="absolute inset-0 p-4 md:p-6">
+      <div className="relative h-[45vw] w-full overflow-hidden rounded-2xl border border-transparent bg-paper-dim transition-all duration-300 group-hover:border-accent/30 group-hover:shadow-xl group-hover:shadow-ink/5 md:h-[38vh] md:w-[46%]">
+        <div className="absolute inset-0 p-4 transition-transform duration-500 group-hover:scale-105 md:p-6">
           <Image
             src={project.image}
             alt={project.title}

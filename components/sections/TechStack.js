@@ -17,7 +17,7 @@ export default function TechStack() {
           {technologies.map((group) => (
             <div
               key={group.category}
-              className="rounded-3xl border border-line bg-paper p-7 md:p-8"
+              className="rounded-3xl border border-line bg-paper p-7 transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-xl hover:shadow-ink/5 md:p-8"
             >
               <h3 className="font-display text-lg font-semibold text-ink md:text-xl">
                 {group.category}

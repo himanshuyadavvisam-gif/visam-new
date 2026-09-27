@@ -14,7 +14,7 @@ export default function Footer() {
                 alt={brand.name}
                 width={2039}
                 height={771}
-                className="h-9 w-auto"
+                className="h-14 w-auto"
               />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-soft">

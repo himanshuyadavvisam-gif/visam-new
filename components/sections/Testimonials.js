@@ -18,7 +18,7 @@ export default function Testimonials() {
         {testimonials.map((t) => (
           <figure
             key={t.name}
-            className="flex flex-col justify-between rounded-3xl border border-line bg-paper-dim/50 p-8"
+            className="flex flex-col justify-between rounded-3xl border border-line bg-paper-dim/50 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:bg-paper-dim hover:shadow-xl hover:shadow-ink/5"
           >
             <blockquote className="font-display text-xl leading-snug text-ink md:text-2xl">
               <span className="text-accent">&ldquo;</span>

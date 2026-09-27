@@ -74,7 +74,7 @@ export default function Process() {
           </div>
 
           <div className="md:sticky md:top-32 md:h-fit">
-            <div className="rounded-3xl border border-line bg-paper-dim/50 p-8 md:p-10">
+            <div className="rounded-3xl border border-line bg-paper-dim/50 p-8 transition-all duration-300 hover:border-accent/30 hover:shadow-xl hover:shadow-ink/5 md:p-10">
               <div className="font-display text-5xl font-semibold text-ink md:text-6xl">
                 8–12
               </div>
